@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Attacker Log</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="logger-body">
+  <div class="logger-wrap">
+    <h2>&gt; captured_cookies.log</h2>
+    <div class="sub"><a href="/labs">&larr; Labs hub</a> &nbsp;·&nbsp; <a href="/product">Stored XSS</a> &nbsp;·&nbsp; <a href="/search">Reflected XSS</a></div>
+    <div class="terminal">
+      <% if (captured.length === 0) { %>
+        <div class="empty">(ยังไม่มีข้อมูลถูกดักจับ)</div>
+      <% } %>
+      <% captured.forEach(function(c) { %>
+        <div class="row">[<%= c.time %>] <%= c.cookie %></div>
+      <% }); %>
+    </div>
+  </div>
+</body>
+</html>

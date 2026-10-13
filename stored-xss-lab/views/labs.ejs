@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Security Labs - ThaiGadget</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=Sarabun:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="hub-body">
+  <div class="hub-nav">
+    <a class="logo" href="/labs">Thai<span>Gadget</span> <span style="color:#8a90a8;font-weight:500;font-size:14px;">Security Labs</span></a>
+    <div class="topbar-links">
+      <span>สวัสดี <b><%= user %></b></span>
+      <a href="/logger">Cookie Logger</a>
+      <a href="/logout">ออกจากระบบ</a>
+    </div>
+  </div>
+
+  <div class="hub-hero">
+    <span class="kicker on-dark">XSS TRAINING GROUND</span>
+    <h1>Practice exploiting Cross-Site Scripting on a real-looking storefront</h1>
+    <p>Two intentionally vulnerable labs, one demo shop. Inject a payload, see it fire, then flip SAFE_MODE and HTTPONLY to watch the same attack get neutralized.</p>
+  </div>
+
+  <div class="hub-content">
+    <div class="status-row">
+      <span class="status-pill">
+        <span class="dot <%= safeMode ? 'on' : 'off' %>"></span>
+        SAFE_MODE = <%= safeMode %>
+      </span>
+      <span class="status-pill">
+        <span class="dot <%= httpOnly ? 'on' : 'off' %>"></span>
+        HTTPONLY = <%= httpOnly %>
+      </span>
+    </div>
+
+    <div class="lab-grid">
+      <div class="lab-card stored">
+        <div class="lab-icon">📝</div>
+        <div class="badges">
+          <span class="lab-pill type">Stored XSS</span>
+          <span class="lab-pill diff-easy">Easy</span>
+        </div>
+        <h3>Product Reviews</h3>
+        <p>Submit a review on the EarPro X headphones. Unescaped text is saved server-side and re-rendered for every visitor who views the product page — a classic persistent payload.</p>
+        <a class="go" href="/product">Open lab &rarr;</a>
+      </div>
+
+      <div class="lab-card reflected">
+        <div class="lab-icon">🔍</div>
+        <div class="badges">
+          <span class="lab-pill type">Reflected XSS</span>
+          <span class="lab-pill diff-easy">Easy</span>
+        </div>
+        <h3>Product Search</h3>
+        <p>Search the catalog. Your query is echoed straight back into the "no results" message with no encoding — craft a URL and get someone else to click it.</p>
+        <a class="go" href="/search">Open lab &rarr;</a>
+      </div>
+    </div>
+
+    <div class="activity-row">
+      <div class="activity-card">
+        <div class="activity-head">
+          <span class="activity-icon">📝</span>
+          <div>
+            <div class="activity-title">REVIEWS STORED</div>
+            <div class="activity-count"><%= reviewCount %></div>
+          </div>
+        </div>
+        <div class="activity-latest">
+          <% if (lastReview) { %>
+            Latest by <b><%= lastReview.user %></b>: <span class="activity-snippet"><%= lastReview.text.slice(0, 60) %><%= lastReview.text.length > 60 ? '…' : '' %></span>
+          <% } else { %>
+            No reviews yet — <a href="/product">try the Stored XSS lab →</a>
+          <% } %>
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-head">
+          <span class="activity-icon">🍪</span>
+          <div>
+            <div class="activity-title">COOKIES CAPTURED</div>
+            <div class="activity-count"><%= cookieCount %></div>
+          </div>
+        </div>
+        <div class="activity-latest">
+          <% if (lastCapture) { %>
+            Last hit at <%= lastCapture.time %> — <a href="/logger">view logger →</a>
+          <% } else { %>
+            Nothing captured yet — land a working payload in either lab.
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

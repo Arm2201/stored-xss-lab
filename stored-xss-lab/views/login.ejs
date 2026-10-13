@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ThaiGadget</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=Sarabun:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="login-body">
+  <div class="hub-nav">
+    <a class="logo" href="/login">Thai<span>Gadget</span> <span style="color:#8a90a8;font-weight:500;font-size:14px;">Security Labs</span></a>
+  </div>
+
+  <div class="login-hero">
+    <span class="kicker on-light">WELCOME BACK</span>
+    <h1>Sign in to your labs</h1>
+    <p>Practice Stored and Reflected XSS on a demo storefront, then flip SAFE_MODE / HTTPONLY to see the fix.</p>
+  </div>
+
+  <div class="login-card-wrap">
+    <div class="card">
+      <h2>เข้าสู่ระบบ</h2>
+      <% if (error) { %><div class="error"><%= error %></div><% } %>
+      <form method="POST" action="/login">
+        <label>ชื่อผู้ใช้</label>
+        <input name="username" autocomplete="off">
+        <label>รหัสผ่าน</label>
+        <input name="password" type="password" autocomplete="off">
+        <button type="submit">เข้าสู่ระบบ</button>
+      </form>
+      <div class="hint">บัญชีทดลอง: <code>alice</code> / <code>password123</code></div>
+    </div>
+  </div>
+</body>
+</html>

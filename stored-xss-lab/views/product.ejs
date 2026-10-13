@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ThaiGadget - หูฟังไร้สาย</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=Sarabun:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div class="topbar">
+    <a class="logo" href="/labs">Thai<span>Gadget</span></a>
+    <div class="lab-tabs">
+      <a href="/product" class="active">Stored XSS</a>
+      <a href="/search">Reflected XSS</a>
+    </div>
+    <div class="topbar-links">
+      <span class="shield-badge <%= safeMode ? 'on' : 'off' %>">
+        <% if (safeMode) { %>&#128274; SAFE_MODE: true<% } else { %>&#9888; SAFE_MODE: false<% } %>
+      </span>
+      <span>สวัสดี <b><%= user %></b></span>
+      <a href="/logger">Cookie Logger</a>
+      <a href="/logout">ออกจากระบบ</a>
+    </div>
+  </div>
+
+  <div class="lab-banner">
+    <div class="lab-banner-inner">
+      <span>📝 <b>Stored XSS lab</b> — a review saved here renders unescaped for every visitor to this page.</span>
+      <a href="/labs">&larr; Labs hub</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="product" style="margin-top:24px;">
+      <div class="product-icon">
+        <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+          <path d="M20 30V22C20 13.16 26.16 7 34 7C41.84 7 48 13.16 48 22V30" stroke="#ff8a3d" stroke-width="4" stroke-linecap="round"/>
+          <rect x="12" y="28" width="14" height="22" rx="7" fill="#ff8a3d"/>
+          <rect x="42" y="28" width="14" height="22" rx="7" fill="#1a1f2e"/>
+          <circle cx="19" cy="39" r="2.5" fill="#fff"/>
+          <circle cx="49" cy="39" r="2.5" fill="#fff"/>
+        </svg>
+      </div>
+      <div>
+        <h2>หูฟังไร้สาย EarPro X</h2>
+        <div class="price">599 บาท</div>
+        <p class="desc">ตัดเสียงรบกวน แบตอึด 30 ชั่วโมง กันน้ำ IPX5</p>
+      </div>
+    </div>
+
+    <h3 class="section-title">รีวิวจากลูกค้า</h3>
+    <% reviews.forEach(function(r) { %>
+      <div class="review">
+        <div class="user"><%= r.user %></div>
+        <div class="text"><%- r.text %></div>
+      </div>
+    <% }); %>
+
+    <form class="review-form" method="POST" action="/review">
+      <h3 class="section-title" style="margin-bottom:10px;">เขียนรีวิว</h3>
+      <textarea name="text" rows="3" placeholder="แสดงความคิดเห็นเกี่ยวกับสินค้า..."></textarea>
+      <br>
+      <button class="submit" type="submit">ส่งรีวิว</button>
+    </form>
+  </div>
+</body>
+</html>
